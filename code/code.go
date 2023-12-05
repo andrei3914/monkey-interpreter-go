@@ -6,6 +6,25 @@ import (
 	"fmt"
 )
 
+const (
+	OpConstant Opcode = iota
+	OpAdd
+)
+
+var definitions = map[Opcode]*Definition{
+	OpConstant: {"OpConstant", []int{2}},
+	OpAdd:      {"OpAdd", []int{}},
+}
+
+type Definition struct {
+	Name          string
+	OperandWidths []int
+}
+
+type Instructions []byte
+
+type Opcode byte
+
 func Make(op Opcode, operands ...int) []byte {
 	def, ok := definitions[op]
 	if !ok {
@@ -53,15 +72,6 @@ func ReadUint16(ins Instructions) uint16 {
 	return binary.BigEndian.Uint16(ins)
 }
 
-type Definition struct {
-	Name          string
-	OperandWidths []int
-}
-
-var definitions = map[Opcode]*Definition{
-	OpConstant: {"OpConstant", []int{2}},
-}
-
 func Lookup(op byte) (*Definition, error) {
 	def, ok := definitions[Opcode(op)]
 	if !ok {
@@ -70,14 +80,6 @@ func Lookup(op byte) (*Definition, error) {
 
 	return def, nil
 }
-
-type Instructions []byte
-
-type Opcode byte
-
-const (
-	OpConstant Opcode = iota
-)
 
 func (ins Instructions) String() string {
 	var out bytes.Buffer
@@ -108,6 +110,8 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) string {
 	}
 
 	switch operandCount {
+	case 0:
+		return def.Name
 	case 1:
 		return fmt.Sprintf("%s %d", def.Name, operands[0])
 	}
