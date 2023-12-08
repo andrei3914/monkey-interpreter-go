@@ -8,11 +8,13 @@ import (
 
 const (
 	OpConstant Opcode = iota
-	OpAdd
 	OpPop
+	OpAdd
 	OpSub
 	OpMul
 	OpDiv
+	OpTrue
+	OpFalse
 )
 
 var definitions = map[Opcode]*Definition{
@@ -22,6 +24,8 @@ var definitions = map[Opcode]*Definition{
 	OpSub:      {"OpSub", []int{}},
 	OpMul:      {"OpMul", []int{}},
 	OpDiv:      {"OpDiv", []int{}},
+	OpTrue:     {"OpTrue", []int{}},
+	OpFalse:    {"OpFalse", []int{}},
 }
 
 type Definition struct {
