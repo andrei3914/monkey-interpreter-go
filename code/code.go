@@ -8,21 +8,31 @@ import (
 
 const (
 	OpConstant Opcode = iota
+
 	OpPop
+
 	OpAdd
 	OpSub
 	OpMul
 	OpDiv
+
 	OpTrue
 	OpFalse
+
 	OpEqual
 	OpNotEqual
 	OpGreaterThan
+
 	OpMinus
 	OpBang
+
 	OpJumpNotTruthy
 	OpJump
+
 	OpNull
+
+	OpSetGlobal
+	OpGetGlobal
 )
 
 var definitions = map[Opcode]*Definition{
@@ -42,6 +52,8 @@ var definitions = map[Opcode]*Definition{
 	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 	OpJump:          {"OpJump", []int{2}},
 	OpNull:          {"OpNull", []int{}},
+	OpSetGlobal:     {"OpGetGlobal", []int{2}},
+	OpGetGlobal:     {"OpSetGlobal", []int{2}},
 }
 
 type Definition struct {
