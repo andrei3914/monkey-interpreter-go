@@ -36,6 +36,7 @@ const (
 
 	OpArray
 	OpHash
+	OpIndex
 )
 
 var definitions = map[Opcode]*Definition{
@@ -59,6 +60,7 @@ var definitions = map[Opcode]*Definition{
 	OpGetGlobal:     {"OpSetGlobal", []int{2}},
 	OpArray:         {"OpArray", []int{2}},
 	OpHash:          {"OpArray", []int{2}},
+	OpIndex:         {"OpIndex", []int{}},
 }
 
 type Definition struct {
