@@ -51,12 +51,14 @@ const (
 	TRUE     = "TRUE"
 	FALSE    = "FALSE"
 	MACRO    = "MACRO"
+	WHILE    = "WHILE"
 )
 
 var keywords = map[string]TokenType{
 	"fn":     FUNCTION,
 	"let":    LET,
 	"if":     IF,
+	"while":  WHILE,
 	"else":   ELSE,
 	"return": RETURN,
 	"true":   TRUE,
